@@ -1,0 +1,299 @@
+
+<html>
+<head>
+	<title> </title>
+	<style>
+		body{
+			font-family: PingFangSC-Regular, Verdana, Arial, '微软雅黑','宋体';
+		}
+		@keyframes 主标题{
+			from{
+				letter-spacing:2.5em;
+				top:30%;
+			}
+			to{
+				letter-spacing:0.3em;
+				top:50%;
+				color:rgba(255,255,255,0.7);
+				filter:opacity(100%);
+			}
+		}
+		@keyframes 结束标题{
+			from{
+				letter-spacing:0.3em;
+				top:50%;
+				color:rgba(255,255,255,0.7);
+				filter:opacity(100%);
+			}
+			to{
+				letter-spacing:0.7em;
+				top:80%;
+				color:rgba(255,255,255,0);
+				filter:opacity(0%);
+			}
+		}
+		#主标题,#结束标题{
+			font-size:4em;
+			text-align:center;
+		}
+		.a{
+			white-space:nowrap;
+			transition:color 1s,filter 1s,left 1s,top 1s,font-size 1s;
+			margin:0;
+			position:absolute;
+			left:50%;
+			top:50%;
+			transform:translate(-50%,-50%);
+			display:none;
+			filter:opacity(0%);
+			font-size:2em;
+		}
+	</style>
+
+</head>
+<body style='transition:background 2s;margin:0;background:#000;overflow:hidden;'>
+	<div class='a' id='主标题'>&ensp;开始吧!<br/>&ensp;Let's go!</div>
+	<div class='a' id='d1'>
+		我自己的方法可能适用于我自己,<br/>也可能会适用于你,<br/>但不保证我的方法一定有效,<br/>甚至可能对你有副作用,<br/>或者也许你有更好的方法.<br/>请自行选择,不要盲目跟随,谢谢.
+	</div>
+	<div class='a' id='h1h1'>1.好的生活习惯</div>
+	<p class='a' id='h1p1'>生活习惯会间接地影响学习</p>
+	<div class='a' id='d2'>
+		<dl>
+			<dt>早睡早起</dt><dd>睡好了才有精神学习,尤其是理科<br/>在很困的时候学习,效率会降低</dd>
+			<dt>吃好</dt><dd>吃饱,才能学的好<br/>少吃垃圾食品</dd>
+		</dl>
+
+	</div>
+	<div class='a' id='h2h1'>2.好的学习习惯</div>
+	<p class='a' id='h2p1'>学习习惯会直接地影响学习</p>
+	<div class='a' id='d3'>
+		<dl>
+			<dt>不要什么都只记在纸上</dt><dd>只把老师讲或写的内容都记在纸上,脑子是闲的或者想其他的.<br/>这样其实不好<br/>可能脑子多想一些老师讲的内容,并尝试自己做一遍,会比直接抄更好</dd>
+			<dt>提高自主学习能力</dt><dd>有些题型,老师没讲过的,就不会了.<br/>其实,这种题型,很可能在书里或练习册里<br/>还是不会做?照着答案用铅笔做一遍,再试试自己做</dd>
+			<dt></dt><dd><br/></dd>
+			<dt></dt><dd><br/></dd>
+		</dl>
+	</div>
+	<div class='a' id='d4'></div>
+	<div class='a' id='d5'>5</div>
+	<div class='a' id='d6'>6</div>
+	<div class='a' id='d7'>7</div>
+	<div class='a' id='d8'>8</div>
+	<div class='a' id='结束标题'>&ensp;谢谢!<br/>&ensp;Thanks!</div>
+	<script>
+
+
+function full(ele) {
+	if(ele.requestFullscreen){
+		ele.requestFullscreen();
+	}else if(ele.mozRequestFullScreen){
+		ele.mozRequestFullScreen();
+	}else if(ele.webkitRequestFullscreen){
+		ele.webkitRequestFullscreen();
+	}else if(ele.msRequestFullscreen){
+		ele.msRequestFullscreen();
+	}
+}
+
+function exitFullscreen(){
+	if(document.exitFullScreen){
+		document.exitFullScreen();
+	}else if(document.mozCancelFullScreen){
+		document.mozCancelFullScreen();
+	}else if(document.webkitExitFullscreen){
+		document.webkitExitFullscreen();
+	}else if(document.msExitFullscreen){
+		document.msExitFullscreen();
+    }
+}
+
+document.body.onclick=()=>{
+	full(document.all[0]);
+	document.body.onclick=f;
+	document.body.style.cursor='none';
+	/*document.body.onkeydown=(e)=>{
+		if(e.keyCode==32)
+			f();
+	};
+	*/
+};
+页数=0;
+
+function 换页(d1,d2){
+	d1.style.filter='opacity(0%)';
+	d2.style.display='block';
+	setTimeout(()=>{
+		setTimeout(()=>{
+			d1.style.display='';
+		},500);
+		d2.style.filter='opacity(100%)';
+		document.body.onclick=f;
+	},500);
+
+}
+
+function f(){
+	document.body.onclick=null;
+	if(页数==0){
+		主标题=document.getElementById('主标题');
+		主标题.style.display='block';
+		主标题.style.animation='主标题 1s';
+		主标题.style.animationFillMode='forwards';
+		主标题.onanimationend=()=>{
+			setTimeout(()=>{
+				主标题.style.letterSpacing='0.3em';
+				主标题.style.top='50%';
+				主标题.style.color='rgba(255,255,255,0.7)';
+				主标题.style.filter='opacity(100%)';
+				主标题.style.animation='';
+				setTimeout(()=>{
+					document.body.style.background='';
+					document.body.ontransitionend=()=>{
+						document.body.ontransitionend=null;
+						setTimeout(()=>{
+							主标题.style.display='';
+							document.body.onclick=f;
+						},1000);
+					};
+						d1.style.display='block';
+						setTimeout(()=>{
+							d1.style.filter='opacity(100%)';
+						},50);
+				},500);
+			},500)
+		};
+	}else if(页数==1){
+		d1.style.filter='opacity(0%)';
+		h1h1.style.fontWeight='bold';
+		h1h1.style.fontSize='4em';
+		h1h1.style.display='block';
+		setTimeout(()=>{
+			setTimeout(()=>{
+				d1.style.display='';
+			},500);
+			h1h1.style.filter='opacity(100%)';
+		},500);
+		setTimeout(()=>{
+		document.body.onclick=()=>{
+			document.body.onclick=null;
+			h1h1.style.left='120px';
+			h1h1.style.top='48px';
+			//h1样式
+			h1h1.style.fontWeight='bold';
+			h1h1.style.fontSize='2em';
+
+			
+			h1p1.style.display='block';
+			h1p1.style.left='450px';
+			h1p1.style.top='48px';
+			
+			h1h1.ontransitionend=()=>{
+			setTimeout(()=>{
+				d2.style.filter='opacity(100%)';
+				h1p1.style.filter='opacity(100%)';
+			},50);
+			setTimeout(()=>{
+				//h1p1.style.display='';
+			document.body.onclick=f;
+			},1000);
+			d2.style.display='block';
+			};
+		};
+		},1100);
+	}else if(页数==2){
+		h1h1.style.filter='opacity(0%)';
+		h1p1.style.filter='opacity(0%)';
+		
+
+
+		d2.style.filter='opacity(0%)';
+		h2h1.style.fontWeight='bold';
+		h2h1.style.fontSize='4em';
+		h2h1.style.display='block';
+		setTimeout(()=>{
+			setTimeout(()=>{
+				h1h1.style.display='';
+				h1p1.style.display='';
+				d2.style.display='';
+			},500);
+			h2h1.style.filter='opacity(100%)';
+		},500);
+		setTimeout(()=>{
+		document.body.onclick=()=>{
+			document.body.onclick=null;
+			h2h1.style.left='120px';
+			h2h1.style.top='48px';
+			//h1样式
+			h2h1.style.fontWeight='bold';
+			h2h1.style.fontSize='2em';
+
+			
+			h2p1.style.display='block';
+			h2p1.style.left='450px';
+			h2p1.style.top='48px';
+			
+			h2h1.ontransitionend=()=>{
+			setTimeout(()=>{
+				d3.style.filter='opacity(100%)';
+				h2p1.style.filter='opacity(100%)';
+			},50);
+			setTimeout(()=>{
+				//h2p1.style.display='';
+			document.body.onclick=f;
+			},1000);
+			d3.style.display='block';
+			};
+		};
+		},1100);
+		
+	}else if(页数==3){
+		
+		h2h1.style.filter='opacity(0%)';
+		h2p1.style.filter='opacity(0%)';
+		d3.style.filter='opacity(0%)';
+		d4.style.display='block';
+		setTimeout(()=>{
+			setTimeout(()=>{
+				h2h1.style.display='';
+				h2p1.style.display='';
+				d3.style.display='';
+			},500);
+			d4.style.filter='opacity(100%)';
+			document.body.onclick=f;
+		},500);
+	}else if(页数==4){
+		/*
+		换页(d4,d5);
+	}else if(页数==5){
+		换页(d5,d6);
+	}else if(页数==6){
+		换页(d6,d7);
+	}else if(页数==7){
+		换页(d7,d8);
+	}else if(页数==8){
+		*/
+		document.body.onclick=()=>{
+			exitFullscreen();
+		}
+		d8.style.display='';
+		document.body.style.background='#000';
+		结束标题.style.color='rgba(255,255,255,0.7)';
+		结束标题.style.letterSpacing='0.3em';
+			结束标题.style.display='block';
+			setTimeout(()=>{
+				结束标题.style.filter='opacity(100%)';
+			},50);
+		document.body.ontransitionend=()=>{
+			setTimeout(()=>{
+				结束标题.style.animation='结束标题 1.5s';
+				结束标题.style.animationFillMode='forwards';
+			},1000);
+		};
+	}
+	页数++;
+}
+	</script>
+	
+</body>
+</html>
